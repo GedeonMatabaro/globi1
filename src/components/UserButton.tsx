@@ -4,7 +4,7 @@ import { logout } from "@/app/(auth)/actions";
 import { useSession } from "@/app/(main)/SessionProvider";
 import { cn } from "@/lib/utils";
 import { useQueryClient } from "@tanstack/react-query";
-import { Check, LogOutIcon, Monitor, Moon, Sun, UserIcon } from "lucide-react";
+import { Check, ChevronRight, LogOutIcon, Monitor, Moon, Sun, UserIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import {
@@ -23,9 +23,10 @@ import UserAvatar from "./UserAvatar";
 
 interface UserButtonProps {
   className?: string;
+  textS?: string;
 }
 
-export default function UserButton({ className }: UserButtonProps) {
+export default function UserButton({ className, textS }: UserButtonProps) {
   const { user } = useSession();
 
   const { theme, setTheme } = useTheme();
@@ -36,7 +37,11 @@ export default function UserButton({ className }: UserButtonProps) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className={cn("flex-none rounded-full", className)}>
-          <UserAvatar avatarUrl={user.avatarUrl} size={40} />
+          <span className="flex items-center">
+            <UserAvatar avatarUrl={user.avatarUrl} size={40} />
+            <span className="text-primary ml-2">{textS}</span>
+          </span>
+          
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
