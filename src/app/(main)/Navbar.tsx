@@ -14,8 +14,8 @@ export default function Navbar() {
     </Link>
     <SearchField />
   </div>
-  {/* <MenuBar className="hidden sm:flex sm:flex-1 sm:justify-center" />
-   */}
+  <MenuBar className="hidden sm:flex sm:flex-1 sm:justify-center" />
+  
   <UserButton className="ml-auto lg:ml-0" />
 </div>
     </header>
