@@ -10,7 +10,7 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-5 px-5 py-3">
         <div className="flex items-center gap-5">
           <Link href="/" className="text-2xl font-bold text-primary">
-            Globi
+            globi.
           </Link>
           <SearchField />
         </div>
