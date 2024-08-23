@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Bell, Bookmark, Home, Mail, MapPinned, Telescope } from "lucide-react";
+import { Bell, Home, Mail, MapPinned } from "lucide-react";
 import Link from "next/link";
 
 interface MenuBarProps {
@@ -16,8 +16,13 @@ export default function MenuBar({ className }: MenuBarProps) {
         asChild
       >
         <Link href="/">
-          <Home />
-          <span className="hidden lg:inline">Home</span>
+          <div className="flex items-center">
+            <div className="flex flex-col items-center">
+              <Home />
+              <span className="text-[10px] sm:hidden">Home</span>
+            </div>
+            <span className="hidden lg:inline ml-2">Home</span>
+          </div>
         </Link>
       </Button>
       <Button
@@ -26,9 +31,14 @@ export default function MenuBar({ className }: MenuBarProps) {
         title="Discover"
         asChild
       >
-        <Link href="/dicover">
-          <MapPinned />
-          <span className="hidden lg:inline">Discover</span>
+        <Link href="/discover">
+          <div className="flex items-center">
+            <div className="flex flex-col items-center">
+              <MapPinned />
+              <span className="text-[10px] sm:hidden">Discover</span>
+            </div>
+            <span className="hidden lg:inline ml-2">Discover</span>
+          </div>
         </Link>
       </Button>
       <Button
@@ -38,8 +48,13 @@ export default function MenuBar({ className }: MenuBarProps) {
         asChild
       >
         <Link href="/notifications">
-          <Bell />
-          <span className="hidden lg:inline">Notifications</span>
+          <div className="flex items-center">
+            <div className="flex flex-col items-center">
+              <Bell />
+              <span className="text-[10px] sm:hidden">Notifications</span>
+            </div>
+            <span className="hidden lg:inline ml-2">Notifications</span>
+          </div>
         </Link>
       </Button>
       <Button
@@ -49,21 +64,15 @@ export default function MenuBar({ className }: MenuBarProps) {
         asChild
       >
         <Link href="/messages">
-          <Mail />
-          <span className="hidden lg:inline">Messages</span>
+          <div className="flex items-center">
+            <div className="flex flex-col items-center">
+              <Mail />
+              <span className="text-[10px] sm:hidden">Messages</span>
+            </div>
+            <span className="hidden lg:inline ml-2">Messages</span>
+          </div>
         </Link>
       </Button>
-      {/* <Button
-        variant="ghost"
-        className="flex items-center justify-start gap-3"
-        title="Bookmarks"
-        asChild
-      >
-        <Link href="/bookmarks">
-          <Bookmark />
-          <span className="hidden lg:inline">Bookmarks</span>
-        </Link>
-      </Button> */}
     </div>
   );
 }
