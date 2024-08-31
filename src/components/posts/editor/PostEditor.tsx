@@ -224,7 +224,7 @@ function AttachmentPreview({
       {!isUploading && (
         <button
           onClick={onRemoveClick}
-          className="absolute right-3 top-3 rounded-full bg-foreground p-1.5 text-background transition-colors hover:bg-foreground/60"
+          className="absolute right-3 top-3 rounded-full bg-white/60 p-1.5 text-foreground transition-colors hover:bg-foreground/45"
         >
           <X size={20} />
         </button>
