@@ -1,11 +1,14 @@
-"use client"
+
 
 import { Button } from "@/components/ui/button";
 import UserButton from "@/components/UserButton";
 import { Bell, Bookmark, CalendarClock, ChevronRight, ContactRound, Home, Mail, MapPinned, NotepadText, Telescope, Users } from "lucide-react";
 import Link from "next/link"; 
-import { useSession } from "@/app/(main)/SessionProvider";
+// import { useSession } from "@/app/(main)/SessionProvider";
 import { Separator } from "@/components/ui/separator"
+import prisma from "@/lib/prisma";
+import NotificationsButton from "@/app/(main)/NotificationsButton";
+import { validateRequest } from "@/auth";
 
 export function SeparatorDemo() {
   return (
@@ -33,9 +36,35 @@ interface SideMenuBarProps {
   className?: string;
 }
 
-export default function SideMenuBar({ className }: SideMenuBarProps) {
+/*
+
+export default async function MenuBar({ className }: MenuBarProps) {
+  const { user } = await validateRequest();
+
+  if (!user) return null;
+
+  const unreadNotificationCount = await prisma.notification.count({
+    where: {
+      recipientId: user.id,
+      read: false,
+    },
+  });
+*/
+
+
+
+export default async function SideMenuBar({ className }: SideMenuBarProps) {
     //ccess the user from the session
-    const { user } = useSession();
+    
+    const { user } = await validateRequest();
+    if (!user) return null;
+
+  const unreadNotificationCount = await prisma.notification.count({
+    where: {
+      recipientId: user.id,
+      read: false,
+    },
+  });
 
   return (
     <div className={className}>
@@ -73,17 +102,10 @@ export default function SideMenuBar({ className }: SideMenuBarProps) {
           <span className="hidden lg:inline">Discover</span>
         </Link>
       </Button>
-      <Button
-        variant="ghost"
-        className="flex items-center justify-start gap-3"
-        title="Notifications"
-        asChild
-      >
-        <Link href="/notifications">
-          <Bell />
-          <span className="hidden lg:inline">Notifications</span>
-        </Link>
-      </Button>
+      <NotificationsButton
+        initialState={{ unreadCount: unreadNotificationCount }}
+      />
+
       <Button
         variant="ghost"
         className="flex items-center justify-start gap-3"
